@@ -66,9 +66,9 @@ variable "devops_tools" {
         sudo apt update -y
         apt-cache policy docker-ce -y
         sudo apt install docker-ce -y
+        sudo usermod -aG docker $USER
         sudo systemctl enable docker 
         sudo systemctl start docker 
-        sudo usermod -aG docker $USER
         sudo docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
         echo "Installed the SonarQube server and initial-script completed" >>/tmp/welcome.txt
         EOF
