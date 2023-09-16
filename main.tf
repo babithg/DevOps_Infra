@@ -20,6 +20,23 @@ resource "aws_instance" "jenkins_server" {
     user_data = var.devops_tools.jenkins_install
     }
 
+resource "aws_instance" "sonarqube_server" {
+    ami = var.sonarqube_server.ami
+    instance_type = var.sonarqube_server.instance_type
+    tags = {
+      Name = var.sonarqube_server.tag_name
+    }
+    root_block_device{
+      volume_size = var.sonarqube_server.disk_size
+    }
+    connection{
+      host = self.public_ip
+      user = var.sonarqube_server.user
+    }
+    security_groups = [aws_security_group.allow_ssh.name, aws_security_group.allow_sonarqube.name]
+    user_data = var.devops_tools.sonarqube_install
+    }
+
 resource "aws_instance" "devops_server" {
   ami = var.devops_server.ami
   instance_type = var.devops_server.instance_type
@@ -73,6 +90,19 @@ resource "aws_security_group" "allow_artifactory" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   
+}
+
+resource "aws_security_group" "allow_sonarqube" {
+  name        = "allow-sonarqube"
+  description = "Allow SSH access from anywhere"
+
+  ingress {
+    from_port   = 9000
+    to_port     = 9000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 }
 
 resource "aws_security_group" "allow_ssh" {
