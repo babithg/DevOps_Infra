@@ -1,5 +1,5 @@
 variable "aws_region" {
-    default = "us-east-1"
+    default = "ap-south-1"
     description = "Region where the AWS Resource getting created"
 }
 
