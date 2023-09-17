@@ -50,7 +50,7 @@ resource "aws_instance" "artifactory_server" {
     host = self.public_ip
     user = var.artifactory_server.user
   }
-  security_groups = [aws_security_group.allow_ssh.name, aws_security_group.allow_artifactory]
+  security_groups = [aws_security_group.allow_ssh.name, aws_security_group.allow_artifactory.name]
 }
 
 resource "aws_security_group" "allow_jenkins" {
