@@ -11,4 +11,4 @@ sudo usermod -aG docker $USER
 sudo systemctl enable docker 
 sudo systemctl start docker 
 sudo docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
-echo "Installed the SonarQube server and initial-script completed" >>/tmp/welcome.txt
+echo "[${date +%Y_%m_%d}] Installed the SonarQube server and initial-script completed" >>/tmp/devops_tools_status

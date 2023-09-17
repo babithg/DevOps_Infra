@@ -15,7 +15,8 @@ docker pull docker.bintray.io/jfrog/artifactory-oss:latest
 sudo mkdir -p /jfrog/artifactory
 sudo chown -R 1030 /jfrog/
 docker run --name artifactory -d \
--p 8081:8081 \
--p 8082:8082 \
+    -p 8081:8081 \
+    -p 8082:8082 \
 -v /jfrog/artifactory:/var/opt/jfrog/artifactory \
-docker.bintray.io/jfrog/artifactory-oss:latest
+    docker.bintray.io/jfrog/artifactory-oss:latest
+echo "[${date +%Y_%m_%d}] Installed the artifactory server and initial-script completed" >>/tmp/devops_tools_status
