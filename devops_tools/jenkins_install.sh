@@ -12,4 +12,4 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 
 sudo apt-get update -y 
 sudo apt-get install jenkins -y
-echo "[${date +%Y_%m_%d}] Installed the jenkins server and initial-script completed" >>/tmp/devops_tools_status
+echo "[`date +%Y_%m_%d`] Installed the jenkins server and initial-script completed" >>/tmp/devops_tools_status

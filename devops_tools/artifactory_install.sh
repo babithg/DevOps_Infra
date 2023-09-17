@@ -19,4 +19,4 @@ docker run --name artifactory -d \
     -p 8082:8082 \
 -v /jfrog/artifactory:/var/opt/jfrog/artifactory \
     docker.bintray.io/jfrog/artifactory-oss:latest
-echo "[${date +%Y_%m_%d}] Installed the artifactory server and initial-script completed" >>/tmp/devops_tools_status
+echo "[`date +%Y_%m_%d`] Installed the artifactory server and initial-script completed" >>/tmp/devops_tools_status
