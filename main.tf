@@ -37,20 +37,20 @@ resource "aws_instance" "sonarqube_server" {
     user_data = var.devops_tools.sonarqube_install
     }
 
-resource "aws_instance" "devops_server" {
-  ami = var.devops_server.ami
-  instance_type = var.devops_server.instance_type
+resource "aws_instance" "artifactory_server" {
+  ami = var.artifactory_server.ami
+  instance_type = var.artifactory_server.instance_type
   tags = {
-    Name = var.devops_server.tag_name
+    Name = var.artifactory_server.tag_name
   }
   root_block_device{
-    volume_size = var.devops_server.disk_size
+    volume_size = var.artifactory_server.disk_size
   }
   connection{
     host = self.public_ip
-    user = var.devops_server.user
+    user = var.artifactory_server.user
   }
-  security_groups = [aws_security_group.allow_ssh.name]
+  security_groups = [aws_security_group.allow_ssh.name, aws_security_group.allow_artifactory]
 }
 
 resource "aws_security_group" "allow_jenkins" {
@@ -127,6 +127,7 @@ resource "aws_security_group" "allow_ssh" {
 output "public_ip" {
   value = {
     Jenkins_Server = aws_instance.jenkins_server.public_ip
-    DevOps_Server = aws_instance.devops_server.public_ip
+    Artifactory_Server = aws_instance.artifactory_server.public_ip
+    SonarQube_Server = aws_instance.sonarqube_server.public_ip
   }
 }

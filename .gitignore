@@ -1,4 +1,8 @@
 .git/
+
 .terraform/
 .terraform.lock.hcl
-.terraform*
+.terraform.*
+terraform.tfstate*
+
+AMIs
