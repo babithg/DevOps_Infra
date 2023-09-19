@@ -40,6 +40,8 @@ variable "devops_tools" {
     default = {
         jenkins_install = <<-EOF
         #!/bin/bash
+        hostname jenkins_master
+        echo "jenkins_master" >/etc/hostname
         sudo apt install -y git
         git clone https://github.com/babithg/DevOps_Infra.git /tmp/setup/
         /bin/bash /tmp/setup/devops_tools/jenkins_install.sh
@@ -47,6 +49,8 @@ variable "devops_tools" {
 
         sonarqube_install = <<-EOF
         #!/bin/bash
+        hostname sonarqube
+        echo "sonarqube" >/etc/hostname
         sudo apt install -y git
         git clone https://github.com/babithg/DevOps_Infra.git /tmp/setup/
         /bin/bash /tmp/setup/devops_tools/sonarqube_install.sh
@@ -54,6 +58,8 @@ variable "devops_tools" {
 
         artifactory_install = <<-EOF
         #!/bin/bash
+        hostname artifactory
+        echo "artifactory" >/etc/hostname
         sudo apt install -y git
         git clone https://github.com/babithg/DevOps_Infra.git /tmp/setup/
         /bin/bash /tmp/setup/devops_tools/artifactory_install.sh
