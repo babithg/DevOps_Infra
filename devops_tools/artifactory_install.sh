@@ -11,12 +11,16 @@ sudo usermod -aG docker $USER
 sudo systemctl enable docker 
 sudo systemctl start docker 
 
-docker pull docker.bintray.io/jfrog/artifactory-oss:latest
-sudo mkdir -p /jfrog/artifactory
-sudo chown -R 1030 /jfrog/
-docker run --name artifactory -d \
+sudo docker pull releases-docker.jfrog.io/jfrog/artifactory-oss:latest
+sudo mkdir -p /jfrog/artifactory/var/etc/
+sudo cd /jfrog/artifactory/var/etc/
+sudo touch ./system.yaml
+sudo chown -R 1030:1030 /jfrog/artifactory/var
+sudo docker run \
+    --name artifactory \
+    -v /jfrog/artifactory/var/:/var/opt/jfrog/artifactory \
     -p 8081:8081 \
     -p 8082:8082 \
--v /jfrog/artifactory:/var/opt/jfrog/artifactory \
-    docker.bintray.io/jfrog/artifactory-oss:latest
+    -d releases-docker.jfrog.io/jfrog/artifactory-oss:latest
+
 echo "[`date +%Y_%m_%d`] Installed the artifactory server and initial-script completed" >>/tmp/devops_tools_status

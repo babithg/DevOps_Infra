@@ -28,7 +28,7 @@ variable "sonarqube_server" {
 variable "artifactory_server" {
     default = {
         ami = "ami-0f5ee92e2d63afc18"
-        instance_type = "t2.medium"
+        instance_type = "t2.xlarge"
         tag_name = "Artifactory_Server"
         disk_size = 8
         user = "ec2-user"
@@ -41,25 +41,22 @@ variable "devops_tools" {
         jenkins_install = <<-EOF
         #!/bin/bash
         sudo apt install -y git
-        git clone https://github.com/babithg/DevOps_Infra.git
-        cd DevOps_Infra/devops_tools
-        /bin/bash jenkins_install.sh
+        git clone https://github.com/babithg/DevOps_Infra.git /tmp/setup/
+        /bin/bash /tmp/setup/devops_tools/jenkins_install.sh
         EOF
 
         sonarqube_install = <<-EOF
         #!/bin/bash
         sudo apt install -y git
-        git clone https://github.com/babithg/DevOps_Infra.git
-        cd DevOps_Infra/devops_tools
-        /bin/bash sonarqube_install.sh
+        git clone https://github.com/babithg/DevOps_Infra.git /tmp/setup/
+        /bin/bash /tmp/setup/devops_tools/sonarqube_install.sh
         EOF
 
         artifactory_install = <<-EOF
         #!/bin/bash
         sudo apt install -y git
-        git clone https://github.com/babithg/DevOps_Infra.git
-        cd DevOps_Infra/devops_tools
-        /bin/bash artifactory_install.sh
+        git clone https://github.com/babithg/DevOps_Infra.git /tmp/setup/
+        /bin/bash /tmp/setup/devops_tools/artifactory_install.sh
         EOF
     }
 }
